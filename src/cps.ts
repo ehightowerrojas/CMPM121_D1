@@ -1,6 +1,6 @@
 // Calculates Clicks Per Second
 const clickTime: number[] = [];
-let ms = 1000;
+const ms = 1000;
 
 // Recording player clicks
 export function recordClick() {
