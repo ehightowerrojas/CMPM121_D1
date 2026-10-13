@@ -1,7 +1,7 @@
 // Vite turns this import into a production-safe URL. Keep it as a file so
 // even this tiny example demonstrates a separately deployed asset.
 // @deno-types="./asset-url.d.ts"
-import tileUrl from "./assets/tile.svg?no-inline";
+import fidgetSpinnerUrl from "./assets/FidgetSpinner.svg?no-inline";
 import { calculateCPS, recordClick } from "./cps.ts";
 import "./style.css";
 
@@ -10,11 +10,17 @@ const app = document.querySelector<HTMLElement>("#app")!;
 const title = document.createElement("h1");
 title.textContent = "Fidget Spinner Simulator?";
 
+const fidgetSpinnerImage = document.createElement("img");
+fidgetSpinnerImage.src = fidgetSpinnerUrl;
+fidgetSpinnerImage.alt = "An artisanally drawn forest green fidget spinner";
+fidgetSpinnerImage.width = 200;
+fidgetSpinnerImage.height = 200;
+
 const subtext = document.createElement("p");
 subtext.textContent =
   "Click the button to spin the fidget spinner! (Beware the background changes on each click)";
 
-app.append(title, subtext);
+app.append(title, fidgetSpinnerImage, subtext);
 
 //-----Button & Counter Logic-----//
 console.log("Counter initialized.");
@@ -42,10 +48,11 @@ app.append(mainClickButton, counterElement);
 
 mainClickButton.addEventListener("click", () => {
   counter += 1;
+  fidgetSpinnerImage.style.transform = "rotate(" + counter.toString() + "deg)";
   counterElement.textContent = counter.toString();
   document.body.style.backgroundColor = `hsl(${
     Math.floor(Math.random() * 360)
-  }, 100%, 50%)`;
+  }, 25%, 50%)`;
   recordClick();
 });
 
