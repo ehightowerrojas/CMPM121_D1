@@ -94,6 +94,8 @@ function Item1Effect() {
 
     timerId = setInterval(() => {
       counter += 1;
+      fidgetSpinnerImage.style.transform = "rotate(" + counter.toString() +
+        "deg)";
       console.log(counter);
       if (counterElement) {
         counterElement.textContent = counter.toString();
