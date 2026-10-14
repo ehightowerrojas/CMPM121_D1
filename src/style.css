@@ -15,7 +15,6 @@ body {
 .mainButton {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
   border: none;
   cursor: pointer;
 }
@@ -23,4 +22,62 @@ body {
 #counter {
   font-size: 2rem;
   font-weight: bold;
+}
+
+.shopGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.itemCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  text-align: center;
+}
+
+.itemCard h1 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.itemCard p {
+  font-size: 0.85rem;
+  margin: 0;
+  min-height: 2.5em;
+}
+
+.itemButton {
+  width: 100px;
+  height: 40px;
+  border: none;
+  background: green;
+  color: white;
+  cursor: pointer;
+}
+
+.itemButton:disabled {
+  background: #b33;
+  cursor: not-allowed;
+}
+
+.itemCard.locked {
+  background: rgba(0, 0, 0, 0.25);
+  filter: grayscale(1);
+}
+
+.itemCard.locked h1 {
+  font-size: 1.6rem;
+  letter-spacing: 4px;
+}
+
+.itemCard.locked .itemButton {
+  background: #555;
 }
