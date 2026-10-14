@@ -56,7 +56,7 @@ app.append(counterElement, cpsElement, mainClickButton);
 //-----Spinner Physics-----//
 let angle = 0; // current rotation in degrees
 let velocity = 0; // degrees per second
-const spinImpulse = 25; // speed added per click (deg/s)
+const spinImpulse = 1.5; // speed added per click (deg/s)
 const friction = 0.6; // fraction of speed lost per second (0..1)
 const maxVelocity = 25000;
 let passiveSpin = 0; // constant spin from items (deg/s)
