@@ -49,7 +49,7 @@ Object.assign(mainClickButton.style, {
 //Displaying Clicks Per Second
 const cpsElement = document.createElement("p");
 
-app.append(cpsElement, mainClickButton, counterElement);
+app.append(counterElement, cpsElement, mainClickButton);
 
 const buttons = [
   {
