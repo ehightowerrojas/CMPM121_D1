@@ -17,8 +17,10 @@ fidgetSpinnerImage.width = 200;
 fidgetSpinnerImage.height = 200;
 
 const subtext = document.createElement("p");
+subtext.style.whiteSpace = "pre-line";
+subtext.style.textAlign = "center";
 subtext.textContent =
-  "Click the button to spin the fidget spinner! (Beware the background changes on each click)";
+  "Click the button to spin the fidget spinner! (Beware the background changes on each click)\n(oh also your clicks gain 10% of your item's clicks/sec)";
 
 app.append(title, fidgetSpinnerImage, subtext);
 
@@ -107,6 +109,17 @@ const buttons = [
     priceIncreaseValue: 2000,
     currentNumOwned: 0,
   },
+  {
+    nameText: document.createElement("h1"),
+    descText: document.createElement("p"),
+    button: document.createElement("button"),
+    name: "1961 Ferrari GT",
+    desc: "like that Ferris Bueller scene! ... Bueller? Bueller?",
+    cps: 2500,
+    currentPrice: 100000,
+    priceIncreaseValue: 100000,
+    currentNumOwned: 0,
+  },
 ];
 
 for (
@@ -172,7 +185,7 @@ for (
 }
 
 mainClickButton.addEventListener("click", () => {
-  counter += 1 + additionalCPS / 100;
+  counter += 1 + additionalCPS / 10;
   fidgetSpinnerImage.style.transform = "rotate(" + counter.toString() + "deg)";
   counterElement.textContent = counter.toFixed(1);
   document.body.style.backgroundColor = `hsl(${
