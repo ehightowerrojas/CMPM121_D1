@@ -1,6 +1,8 @@
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 #app {
@@ -9,6 +11,9 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 12px;
   gap: 12px;
 }
 

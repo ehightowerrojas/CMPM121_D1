@@ -2,6 +2,9 @@
 // even this tiny example demonstrates a separately deployed asset.
 // @deno-types="./asset-url.d.ts"
 import fidgetSpinnerUrl from "./assets/FidgetSpinner.svg?no-inline";
+import dogURL from "./assets/dog-closing-eyes-meme-hero.jpg?no-inline";
+import backgroundUrl from "./assets/pexels-photo-10638623.avif?no-inline";
+import { initSpinnerSkin, updateSpinnerSkin } from "./spinnerskins.ts";
 import { calculateCPS, recordClick } from "./cps.ts";
 import "./style.css";
 
@@ -11,10 +14,21 @@ const title = document.createElement("h1");
 title.textContent = "Fidget Spinner Simulator?";
 
 const fidgetSpinnerImage = document.createElement("img");
-fidgetSpinnerImage.src = fidgetSpinnerUrl;
-fidgetSpinnerImage.alt = "An artisanally drawn forest green fidget spinner";
+initSpinnerSkin(fidgetSpinnerImage);
 fidgetSpinnerImage.width = 200;
 fidgetSpinnerImage.height = 200;
+
+const dog = document.createElement("img");
+dog.src = dogURL;
+dog.alt = "Dog image for the fidget spinner simulator";
+dog.width = 200;
+dog.height = 100;
+
+const background = document.createElement("img");
+background.src = backgroundUrl;
+background.alt = "bacground image for the fidget spinner simulator";
+background.width = 800;
+background.height = 600;
 
 const subtext = document.createElement("p");
 subtext.style.whiteSpace = "pre-line";
@@ -22,7 +36,17 @@ subtext.style.textAlign = "center";
 subtext.textContent =
   "Click the button to spin the fidget spinner! (Beware the background changes on each click)\n(oh also your clicks gain 10% of your item's clicks/sec)";
 
-app.append(title, fidgetSpinnerImage, subtext);
+app.append(title, fidgetSpinnerImage, subtext, dog);
+
+Object.assign(document.body.style, {
+  backgroundImage: `url(${backgroundUrl})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  backgroundAttachment: "fixed",
+  minHeight: "100vh",
+  margin: "0",
+});
 
 //-----Button & Counter Logic-----//
 console.log("Counter initialized.");
@@ -58,7 +82,7 @@ let angle = 0; // current rotation in degrees
 let velocity = 0; // degrees per second
 const spinImpulse = 1.5; // speed added per click (deg/s)
 const friction = 0.6; // fraction of speed lost per second (0..1)
-const maxVelocity = 25000;
+const maxVelocity = 10000000;
 let passiveSpin = 0; // constant spin from items (deg/s)
 
 let lastTime = performance.now();
@@ -101,7 +125,7 @@ const buttons = [
     button: document.createElement("button"),
     name: "hand",
     desc: "Why one finger when you can have a whole hand!",
-    cps: 5,
+    cps: 1,
     currentPrice: 50,
     priceIncreaseValue: 10,
     currentNumOwned: 0,
@@ -113,7 +137,7 @@ const buttons = [
     button: document.createElement("button"),
     name: "octopus",
     desc: "They're really good at this. Like, too good.",
-    cps: 25,
+    cps: 5,
     currentPrice: 1000,
     priceIncreaseValue: 100,
     currentNumOwned: 0,
@@ -125,7 +149,7 @@ const buttons = [
     button: document.createElement("button"),
     name: "two octopus",
     desc: "I mean, yeah I guess. Wait is it octopuses or octopi?",
-    cps: 50,
+    cps: 10,
     currentPrice: 2000,
     priceIncreaseValue: 200,
     currentNumOwned: 0,
@@ -137,7 +161,7 @@ const buttons = [
     button: document.createElement("button"),
     name: "fast-finger Johnny",
     desc: "This guy's got some MEAN spinnin' digits.",
-    cps: 500,
+    cps: 100,
     currentPrice: 10000,
     priceIncreaseValue: 2000,
     currentNumOwned: 0,
@@ -149,7 +173,7 @@ const buttons = [
     button: document.createElement("button"),
     name: "1961 Ferrari GT",
     desc: "like that Ferris Bueller scene! ... Bueller? Bueller?",
-    cps: 2500,
+    cps: 500,
     currentPrice: 100000,
     priceIncreaseValue: 100000,
     currentNumOwned: 0,
@@ -161,7 +185,7 @@ const buttons = [
     button: document.createElement("button"),
     name: "the Earth",
     desc: "rotates pretty fast when you think about it :o",
-    cps: 10000,
+    cps: 2000,
     currentPrice: 750000,
     priceIncreaseValue: 500000,
     currentNumOwned: 0,
@@ -172,7 +196,7 @@ const buttons = [
     button: document.createElement("button"),
     name: "faster-finger Joanne",
     desc: "Johnny WISHES he was her.",
-    cps: 100000,
+    cps: 20000,
     currentPrice: 2000000,
     priceIncreaseValue: 1000000,
     currentNumOwned: 0,
@@ -183,7 +207,7 @@ const buttons = [
     button: document.createElement("button"),
     name: "Cthulhu",
     desc: "When you think about it, it's just a really big octopus!",
-    cps: 1000000,
+    cps: 200000,
     currentPrice: 7500000,
     priceIncreaseValue: 1500000,
     currentNumOwned: 0,
@@ -194,7 +218,7 @@ const buttons = [
     button: document.createElement("button"),
     name: "some 2016 middle-schooler",
     desc: "too cool for school (or linear time).",
-    cps: 9999999,
+    cps: 10000000,
     currentPrice: 99999999,
     priceIncreaseValue: 9999999,
     currentNumOwned: 0,
@@ -205,7 +229,7 @@ const buttons = [
     button: document.createElement("button"),
     name: "the universe",
     desc: "it's just spinning around, man",
-    cps: 99999999,
+    cps: 1000000000,
     currentPrice: 999999999,
     priceIncreaseValue: 99999999,
     currentNumOwned: 0,
@@ -250,6 +274,7 @@ for (const item of buttons) {
     item.currentPrice += item.priceIncreaseValue;
     item.currentNumOwned++;
     additionalCPS += item.cps;
+    updateSpinnerSkin(fidgetSpinnerImage, additionalCPS);
     counterElement.textContent = counter.toFixed(1);
     passiveSpin = Math.min(additionalCPS * 30, 3000);
 
@@ -266,10 +291,6 @@ mainClickButton.addEventListener("click", () => {
   counter += 1 + additionalCPS / 10;
   counterElement.textContent = counter.toFixed(1);
   velocity = Math.min(velocity + spinImpulse, maxVelocity);
-
-  document.body.style.backgroundColor = `hsl(${
-    Math.floor(Math.random() * 360)
-  }, 25%, 50%)`;
   recordClick();
 });
 
