@@ -210,6 +210,17 @@ const buttons = [
     priceIncreaseValue: 99999999,
     currentNumOwned: 0,
   },
+  {
+    nameText: document.createElement("h1"),
+    descText: document.createElement("p"),
+    button: document.createElement("button"),
+    name: "30 middle-schoolers",
+    desc: "30 times more spinning",
+    cps: 999999999,
+    currentPrice: 9999999999,
+    priceIncreaseValue: 999999999,
+    currentNumOwned: 0,
+  }
 ];
 
 // Adding a shop grid where users can see all purchasable items
