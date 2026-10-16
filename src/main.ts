@@ -11,7 +11,7 @@ import "./style.css";
 const app = document.querySelector<HTMLElement>("#app")!;
 
 const title = document.createElement("h1");
-title.textContent = "Fidget Spinner Simulator?";
+title.textContent = "Space Fidget Spinner Simulator";
 
 const fidgetSpinnerImage = document.createElement("img");
 initSpinnerSkin(fidgetSpinnerImage);
@@ -36,7 +36,7 @@ subtext.style.textAlign = "center";
 subtext.textContent =
   "Click the button to spin the fidget spinner! (Beware the background changes on each click)\n(oh also your clicks gain 10% of your item's clicks/sec)";
 
-app.append(title, fidgetSpinnerImage, subtext, dog);
+app.append(title, fidgetSpinnerImage, subtext);
 
 Object.assign(document.body.style, {
   backgroundImage: `url(${backgroundUrl})`,
@@ -244,7 +244,7 @@ const buttons = [
     currentPrice: 9999999999,
     priceIncreaseValue: 999999999,
     currentNumOwned: 0,
-  }
+  },
 ];
 
 // Adding a shop grid where users can see all purchasable items
